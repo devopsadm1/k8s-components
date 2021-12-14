@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nagios
+  name: nagios
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nagios
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nagios
+    spec:
+      containers:
+      - image: jasonrivers/nagios
+        name: nagios
+        resources: {}
+status: {}
+
+---
+
+#Create a service and expose to port number 30008
+
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nagios
+  name: nagios-svc
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 30008 
+  selector:
+    app: nagios
+  type: NodePort
+status:
+  loadBalancer: {}
