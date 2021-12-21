@@ -1,0 +1,10 @@
+
+
+kubeadm init --control-plane-endpoint "192.168.5.30:6443" -apiserver-advertise-address=192.168.5.11 --upload-certs --pod-network-cidr=192.168.0.0/16  
+
+
+with calico cidr
+
+curl https://docs.projectcalico.org/manifests/calico-etcd.yaml -o calico.yaml
+kubectl apply -f calico.yaml
+
